@@ -24,7 +24,7 @@ public class BookingServiceImpl implements BookingService{
     private final PassengerRepository passengerRepository;
     private final BookingRepository bookingRepository;
     private final RestTemplate restTemplate;
-    private final String locationServiceUrl = "http://localhost:7477/api/location";
+    private final String locationServiceUrl = "http://localhost:7478/api/location/nearby/drivers";
 
     public BookingServiceImpl(PassengerRepository passengerRepository, BookingRepository bookingRepository) {
         this.passengerRepository = passengerRepository;
@@ -46,12 +46,15 @@ public class BookingServiceImpl implements BookingService{
 //       make an api call to location service to get near by driver
 
         NearbyDriversRequestDto request = NearbyDriversRequestDto.builder()
-                .latitude(bookingDetails.getStartLocation().getLattitude())
+                .latitude(bookingDetails.getStartLocation().getLatitude())
                 .longitude(bookingDetails.getStartLocation().getLongitude())
                 .build();
 
-        ResponseEntity<DriverLocationDto[]> result = restTemplate.postForEntity(locationServiceUrl + "/nearby/drivers",request, DriverLocationDto[].class);
+        ResponseEntity<DriverLocationDto[]> result = restTemplate.postForEntity(
+                locationServiceUrl ,request, DriverLocationDto[].class
+        );
 
+        assert result.getBody() != null;
         List<DriverLocationDto> driverLocations = Arrays.asList(result.getBody());
         if(result.getStatusCode().is2xxSuccessful() && result.getBody() != null)
         driverLocations.forEach(driverLocation -> {
