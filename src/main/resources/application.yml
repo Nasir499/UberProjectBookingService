@@ -5,7 +5,6 @@ spring:
     url: jdbc:mysql://localhost:3306/uber_db_local
     username: root
     password: Nasir@02
-
   jpa:
     show-sql: true
     hibernate:
@@ -18,5 +17,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
