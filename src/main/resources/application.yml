@@ -1,4 +1,25 @@
+#spring:
+#  application:
+#    name: UberBookingService
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/uber_db_local
+#    username: root
+#    password: Nasir@02
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: validate
+
 spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: sample-group2
   application:
     name: UberBookingService
   datasource:

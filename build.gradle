@@ -43,6 +43,9 @@ dependencies {
 
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation('com.example:Uber-entityService:0.0.5-SNAPSHOT')
+    implementation 'org.springframework.boot:spring-boot-starter-kafka'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter'
 }
 
 tasks.named('test') {
